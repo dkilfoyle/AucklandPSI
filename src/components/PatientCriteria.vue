@@ -26,8 +26,9 @@ div
     q-card-main
       p Stroke onset time and patient criteria are met. The patient may be a candidate for clot retrieval depending on the CT findings. Now:
         ul
-          li Order an immediate CT brain + CTA of neck and brain.
+          li Order an immediate CT brain + CTA of neck and brain. If your hospital cannot perform CTA then consider urgent transfer to your hub hospital. CTA confirmed occlusion is a pre-requiste for transfer to Auckland Hospital. 
           li Ensure the patient has been assessed by the most appropriate local senior available doctor relevant to your hospital. This should be on-call medical registrar or physician, or local on-call neurologist.
+          li Start enquires as to availability of the helicopter. If the helicopter is not available within the timeframe (eg weather conditions) then transfer may not be feasible.
 
   q-card.failing(v-if="!patientCriteriaStatus")
     q-card-main
