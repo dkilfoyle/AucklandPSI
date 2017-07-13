@@ -19,7 +19,7 @@ module.exports = {
 
   build: {
     env: require('./prod.env'),
-    publicPath: '/AucklandPSI/',
+    publicPath: '',
     productionSourceMap: false,
 
     // Remove unused CSS

@@ -1,9 +1,5 @@
 <template lang="pug">
-//- .card
-//-   .card-title.bg-primary.text-white Patient Criteria
-//-   .card-content
-
-q-collapsible(label="Patient Criteria", icon="person", :opened="bOnsetTime", ref="patientCriteriaCollapse")
+div
   q-list
     q-item(tag="label")
       q-item-side
@@ -26,43 +22,43 @@ q-collapsible(label="Patient Criteria", icon="person", :opened="bOnsetTime", ref
       q-item-main
         q-item-tile(label) Is the patient currently in a Midlands or Northern hospital?
 
-  q-card.passing(v-if="bPassAll")
+  q-card.passing(v-if="patientCriteriaStatus")
     q-card-main
       p Stroke onset time and patient criteria are met. The patient may be a candidate for clot retrieval depending on the CT findings. Now:
         ul
           li Order an immediate CT brain + CTA of neck and brain.
           li Ensure the patient has been assessed by the most appropriate local senior available doctor relevant to your hospital. This should be on-call medical registrar or physician, or local on-call neurologist.
-      q-btn(@click="advance()") Continue to patient criteria
 
-  q-card.failing(v-if="bPassAll==false")
+  q-card.failing(v-if="!patientCriteriaStatus")
     q-card-main
       p The patient must meet all of the above criteria. Current responses in this section indicate the patient does not meet screening criteria for clot retrieval. The patient may still be suitable for thrombolysis and you should refer to your local thrombolysis guidelines.
 
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
-
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      age: false,
-      functional: false,
-      BSL: false,
-      hospital: false
     }
   },
   computed: {
-    ...mapGetters(['bOnsetTime']),
-    bPassAll: function () {
-      return (this.age & this.functional & this.BSL & this.hospital)
-    }
-  },
-  methods: {
-    ...mapMutations(['setPatientCriteriaStatus']),
-    advance () {
-      this.setPatientCriteriaStatus(true)
-      this.$refs.patientCriteriaCollapse.close()
+    ...mapGetters(['patientCriteriaStatus']),
+    age: {
+      get () { return this.$store.state.patientCriteria.age },
+      set (value) { this.$store.commit('setAge', value) }
+    },
+    functional: {
+      get () { return this.$store.state.patientCriteria.functional },
+      set (value) { this.$store.commit('setFunctional', value) }
+    },
+    BSL: {
+      get () { return this.$store.state.patientCriteria.BSL },
+      set (value) { this.$store.commit('setBSL', value) }
+    },
+    hospital: {
+      get () { return this.$store.state.patientCriteria.hospital },
+      set (value) { this.$store.commit('setHospital', value) }
     }
   }
 }

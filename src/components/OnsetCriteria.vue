@@ -1,21 +1,15 @@
 <template lang="pug">
-  q-collapsible(label="Onset Time Criteria", icon="access_time", :opened="bStart", ref="onsetTimeCollapse")
+  div 
     p It is critically important to correctly establish the time of symptom onset. An incorrect time of onset may endanger the patient. If the patient awoke with symptoms then time of onset should be assumed to be when they fell asleep prior to waking. If the patient cannot provide any history then time of onset should be when last seen or known to be well.
-    p Use the widget below to set both the date and time of symptom onset. The initial value defaults to 6 hours prior to now.
+    p Use the widget below to set both the date and time of symptom onset. Click on the time to change hours and minutes. Note 24h clock. The initial value defaults to 13 hours prior to current time.
 
-    .row.gutter.justify-center.content-center.items-center
-      div
+    .row.gutter.justify-left.content-center.items-center
+      .col
         q-inline-datetime(format24h v-model="onsetTime" type="datetime")
-      div(v-if="minsSinceOnset < (12*60)")
-        q-card
-          q-card-title(style="text-align:center") Time Since Stroke Onset
-          q-card-main
-            <elapsed-time :date="onsetTime"></elapsed-time>
 
     q-card(v-if="minsSinceOnset < (4.5*60)" style="margin-top:10px;")
       q-card-main.passing
-        p The patient is within 4.5h of symptom onset and is therefore potentially a candidate for IV thrombolysis with alteplase AND/OR clot retrieval. For thrombolysis indications refer to your hospital's local guidelines and procedures. If thrombolysis is indicated according to your local procedures it should be started as soon as possible and should be initiated prior to transfer for clot retrieval if both treatments are indicated. The remainder of this screening tool will refer specifically to clot retrieval.
-        q-btn(@click="advance()") Continue to patient criteria
+        p The patient is within 4.5h of symptom onset and is therefore potentially a candidate for IV thrombolysis with alteplase AND/OR percutaneous intervention. For thrombolysis indications refer to your hospital's local guidelines and procedures. If thrombolysis is indicated according to your local procedures it should be started as soon as possible. Thrombolysis issues should not delay transfer for percutaneous intervention. The remainder of this screening tool will refer specifically to percutaneous intervention
 
     q-card(v-if="minsSinceOnset >= (4.5*60) & minsSinceOnset < (6*60)" style="margin-top:10px;")
       q-card-main.passing
@@ -23,7 +17,6 @@
         q-card(v-if="minsSinceOnset > 5*60" style="margin-bottom:10px;")
           q-card-main.failing
             p WARNING: The patient is within <b>{{(6*60)-minsSinceOnset}} minutes</b> of the upper limit of the treatment window. The patient must complete the rest of the pathway AND arrive at Auckland Hospital within the next {{(6*60)-minsSinceOnset}}minutes in order to be treatable. If that is not feasible then do not continue with this pathway.
-        q-btn(@click="advance()") Continue to patient criteria
 
     q-card(v-if="minsSinceOnset >= (6*60) & minsSinceOnset < (12*60)" style="margin-top:10px;")
       q-card-main.passing
@@ -31,56 +24,26 @@
         q-card(v-if="minsSinceOnset > 11*60" style="margin-bottom:10px;")
           q-card-main.failing
             p WARNING: The patient is within <b>{{(12*60)-minsSinceOnset}} minutes</b> of the upper limit of the treatment window for a basilar occlusion. The patient must complete the rest of the pathway AND arrive at Auckland Hospital within the next {{(12*60)-minsSinceOnset}} minutes in order to be treatable. If that is not feasible then do not continue with this pathway.
-        q-btn(@click="advance()") Continue to patient criteria
 
-    q-card(v-if="minsSinceOnset >= (12*60)" style="margin-top:10px;")
-      q-card-content.failing
+    q-card.failing(v-if="minsSinceOnset >= (12*60)" style="margin-top:10px;")
+      q-card-main
         p The patient is more than 12h post onset and is therefore not suitable for clot retrieval.
 
 </template>
 
 <script>
-import {date} from 'quasar'
-import { mapMutations, mapGetters } from 'vuex'
-import ElapsedTime from './ElapsedTime.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-      onsetTime: date.subtractFromDate(Date.now(), {hours: 6}),
-      showElapsedTime: false
-    }
-  },
-  components: {
-    ElapsedTime
-  },
-  methods: {
-    ...mapMutations(['setOnsetTimeStatus', 'setOnsetTime']),
-    advance () {
-      this.setOnsetTimeStatus(true)
-      this.setOnsetTime(this.onsetTime)
-      this.$refs.onsetTimeCollapse.close()
-      this.showElapsedTime = true
     }
   },
   computed: {
-    ...mapGetters(['bStart']),
-    minsSinceOnset: function () {
-      return (date.getDateDiff(Date.now(), this.onsetTime, 'minutes'))
-    },
-    elapsedTime: function () {
-      let hours = parseInt(Math.floor(this.minsSinceOnset / 60))
-      let mins = parseInt(this.minsSinceOnset % 60)
-      let dHours = (hours > 9 ? hours : '0' + hours)
-      let dMins = (mins > 9 ? mins : '0' + mins)
-      return (dHours + ':' + dMins)
-    }
-  },
-  watch: {
-    minsSinceOnset: function (val) {
-      if (val > (12 * 60)) {
-        this.setOnsetTimeTestStatus(false)
-      }
+    ...mapGetters(['minsSinceOnset']),
+    onsetTime: {
+      get () { return this.$store.state.onsetCriteria.onsetTime },
+      set (value) { this.$store.commit('setOnsetTime', value) }
     }
   }
 }

@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-collapsible(label="Scan Criteria", icon="scanner", :opened="bPatientCriteria", ref="scanCriteriaCollapse")
+  div
     p CTA (CT angiography) is a mandatory pre-requisite. If your hospital does not have CTA capability the patient should be transfered to your nearest CTA capable hospital.
     q-list(style="margin-bottom: 20px")
       q-item(tag="label")
@@ -41,15 +41,14 @@
           q-item-side
             q-checkbox(v-model="neurologistaccepted")
           q-item-tile(label) Has the patient been accepted by the Auckland Hospital on-call neurologist for transfer?
-      q-btn(@click="advance()", v-if="neurologistaccepted") Continue to transfer instructions
 
-    q-card.passing(v-if="isAnterior & iDuration < 360")
+    q-card.passing(v-if="isAnterior && minsSinceOnset < 360")
       q-card-main
         p The patient is within 6h of symptom onset with an occluded anterior circulation artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
-    q-card.passing(v-else-if="isPosterior & iDuration < 720")
+    q-card.passing(v-else-if="isPosterior && minsSinceOnset < 720")
       q-card-main
         p The patient is within 12h of symptom onset with an occluded basilar artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
@@ -65,33 +64,30 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      nobleed: true,
-      ctfinding: 'No Occlusion',
-      neurologistaccepted: false
     }
   },
   computed: {
-    ...mapGetters(['bPatientCriteria', 'iDuration']),
-    isAnterior: function () {
-      return (this.nobleed & (this.ctfinding === 'ICA' | this.ctfinding === 'MCA'))
+    ...mapGetters(['minsSinceOnset', 'isAnterior', 'isPosterior', 'scanCriteriaStatus']),
+    nobleed: {
+      get () { return this.$store.state.scanCriteria.nobleed },
+      set (value) { this.$store.commit('setNoBleed', value) }
     },
-    isPosterior: function () {
-      return (this.nobleed & this.ctfinding === 'basilar')
-    }
-  },
-  methods: {
-    ...mapMutations(['setScanCriteriaStatus']),
-    advance () {
-      this.setScanCriteriaStatus(true)
-      this.$refs.scanCriteriaCollapse.close()
+    ctfinding: {
+      get () { return this.$store.state.scanCriteria.ctfinding },
+      set (value) { this.$store.commit('setCTFinding', value) }
+    },
+    neurologistaccepted: {
+      get () { return this.$store.state.scanCriteria.neurologistaccepted },
+      set (value) { this.$store.commit('setNeurologistAccepted', value) }
     }
   }
 }
 </script>
 
 <style>
+
 </style>

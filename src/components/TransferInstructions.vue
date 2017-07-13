@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-collapsible(label="Transfer Instructions", icon="airplanemode_active", :opened="bScanCriteria", ref="transferInstructionsCollapse")
+  div
     q-card.bg-blue-2
       q-card-main
         p
@@ -12,14 +12,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
     }
-  },
-  computed: {
-    ...mapGetters(['bScanCriteria'])
   }
 }
 </script>

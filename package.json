@@ -2,7 +2,7 @@
   "name": "auckland-psi",
   "version": "0.0.1",
   "description": "A Screening Tool for PSI at ACH",
-  "author": "Your Name",
+  "author": "Dean Kilfoyle",
   "scripts": {
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",

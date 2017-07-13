@@ -37,7 +37,11 @@ import Quasar, {
   QCollapsible,
   QRadio,
   QCheckbox,
-  QInlineDatetime
+  QInlineDatetime,
+  QAlert,
+  QStepper,
+  QStep,
+  QStepperNavigation
 } from 'quasar'
 
 import router from './router'
@@ -70,7 +74,11 @@ Vue.use(Quasar, {
     QCollapsible,
     QRadio,
     QCheckbox,
-    QInlineDatetime
+    QInlineDatetime,
+    QAlert,
+    QStepper,
+    QStep,
+    QStepperNavigation
   }
 }) // Install Quasar Framework
 
