@@ -1,19 +1,29 @@
-# Quasar App
+# Auckland PSI
 
-> A Quasar project
+> An online decision tool for selecting patients for Percutaneous Stroke Intervention
 
-## Build Setup
+## Instructions for Local Installation
 
-``` bash
-# install dependencies
-$ npm install
+1. Install Node.js
 
-# serve with hot reload at localhost:8080
-$ quasar dev
+2. Install quasar-cli
 
-# build for production with minification
-$ quasar build
+  ``` bash
+  # global install quasar-cli
+  $ npm install -g quasar-cli
+  ```
 
-# lint code
-$ quasar lint
-```
+3. Fork or download this repository to local directory
+
+4. cd to local directory and run
+
+  ``` bash
+  # install dependencies
+  $ npm install
+
+  # serve with hot reload at localhost:8080
+  $ quasar dev
+
+  # build for production with minification
+  $ quasar build
+  ```
