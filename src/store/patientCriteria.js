@@ -6,10 +6,6 @@ const module = {
     hospital: false
   },
   getters: {
-    age: state => state.age,
-    functional: state => state.functional,
-    BSL: state => state.BSL,
-    hospital: state => state.hospital,
     patientCriteriaStatus: (state, getters) => {
       return (state.age && state.functional && state.BSL && state.hospital)
     }

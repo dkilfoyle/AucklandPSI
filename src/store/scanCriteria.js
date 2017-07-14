@@ -5,9 +5,6 @@ const module = {
     neurologistaccepted: false
   },
   getters: {
-    nobleed: state => state.nobleed,
-    ctfinding: state => state.ctfinding,
-    neurologistaccepted: state => state.neurologistaccepted,
     isAnterior: state => { return (state.nobleed && (state.ctfinding === 'ICA' || state.ctfinding === 'MCA')) },
     isPosterior: state => { return (state.nobleed && state.ctfinding === 'basilar') },
     scanCriteriaStatus: (state, getters) => {
