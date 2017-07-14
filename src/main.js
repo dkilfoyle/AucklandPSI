@@ -7,6 +7,7 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 // ==============================
 
 // Uncomment the following lines if you need IE11/Edge support
+import 'es6-promise/auto'
 require(`quasar/dist/quasar.ie`)
 require(`quasar/dist/quasar.ie.${__THEME}.css`)
 
