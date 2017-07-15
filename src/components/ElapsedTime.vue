@@ -1,7 +1,7 @@
 <template>
   <div class="flip-clock" data-date="2017-07-01 12:00:00" @click="update">
-    <tracker property="Hours" :time="hours"></tracker>
-    <tracker property="Minutes" :time="minutes"></tracker>
+    <tracker property="Hours" :time="hours" :isvalid="isvalid"></tracker>
+    <tracker property="Minutes" :time="minutes" :isvalid="isvalid"></tracker>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import Tracker from './Tracker.vue'
 import { date } from 'quasar'
 
 export default {
-  props: ['date'],
+  props: ['date', 'isvalid'],
 
   data: () => ({
     hours: 0,

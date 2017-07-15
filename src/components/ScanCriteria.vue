@@ -42,19 +42,19 @@
             q-checkbox(v-model="neurologistaccepted")
           q-item-tile(label) Has the patient been accepted by the Auckland Hospital on-call neurologist for transfer?
 
-    q-card.passing(v-if="isAnterior && minsSinceOnset < 360")
+    q-card.passing(v-if="isAnterior && minsSinceOnset < 360").fullwidth
       q-card-main
         p The patient is within 6h of symptom onset with an occluded anterior circulation artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
-    q-card.passing(v-else-if="isPosterior && minsSinceOnset < 720")
+    q-card.passing(v-else-if="isPosterior && minsSinceOnset < 720").fullwidth
       q-card-main
         p The patient is within 12h of symptom onset with an occluded basilar artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
-    q-card.failing(v-else)
+    q-card.failing(v-else).fullwidth
       q-card-main
         div(v-if="ctfinding==='other'")
           p You have selected 'other' occlusion. Only ICA, MCA and basilar occlusions are suitable for PSI. Isolated occlusions of ACA, PCA or single vertebral are usually not appropriate for PSI.

@@ -1,10 +1,10 @@
 <template>
 <span class="flip-clock__piece">
   <span class="flip-clock__card flip-card">
-    <b class="flip-card__top">{{current | zerofill}}</b>
-    <b class="flip-card__bottom" :data-value="current | zerofill"></b>
-    <b class="flip-card__back" :data-value="previous | zerofill"></b>
-    <b class="flip-card__back-bottom" :data-value="previous | zerofill"></b>
+    <b class="flip-card__top">{{getCurrent}}</b>
+    <b class="flip-card__bottom" :data-value="getCurrent"></b>
+    <b class="flip-card__back" :data-value="getPrevious"></b>
+    <b class="flip-card__back-bottom" :data-value="getPrevious"></b>
   </span>
   <span class="flip-clock__slot">{{property}}</span>
 </span>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['property', 'time'],
+  props: ['property', 'time', 'isvalid'],
 
   data: () => ({
     current: 0,
@@ -20,9 +20,22 @@ export default {
     show: false
   }),
 
-  filters: {
-    zerofill (value) {
-      return (value < 10 && value > -1 ? '0' : '') + value
+  computed: {
+    getCurrent () {
+      if (this.isvalid === false) {
+        return ('??')
+      }
+      else {
+        return (this.current < 10 && this.current > -1 ? '0' : '') + this.current
+      }
+    },
+    getPrevious () {
+      if (this.isvalid === false) {
+        return ('??')
+      }
+      else {
+        return (this.previous < 10 && this.previous > -1 ? '0' : '') + this.previous
+      }
     }
   },
 

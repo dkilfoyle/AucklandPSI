@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  q-list
+  q-list(style="margin-bottom:20px")
     q-item(tag="label")
       q-item-side
         q-checkbox(v-model="age")
@@ -22,7 +22,7 @@ div
       q-item-main
         q-item-tile(label) Is the patient currently in a Midlands or Northern hospital?
 
-  q-card.passing(v-if="patientCriteriaStatus")
+  q-card.passing(v-if="patientCriteriaStatus").fullwidth
     q-card-main
       p Stroke onset time and patient criteria are met. The patient may be a candidate for clot retrieval depending on the CT findings. Now:
         ul
@@ -30,7 +30,7 @@ div
           li Ensure the patient has been assessed by the most appropriate local senior available doctor relevant to your hospital. This should be on-call medical registrar or physician, or local on-call neurologist.
           li Start enquires as to availability of the helicopter. If the helicopter is not available within the timeframe (eg weather conditions) then transfer may not be feasible.
 
-  q-card.failing(v-if="!patientCriteriaStatus")
+  q-card.failing(v-if="!patientCriteriaStatus").fullwidth
     q-card-main
       p The patient must meet all of the above criteria. Current responses in this section indicate the patient does not meet screening criteria for clot retrieval. The patient may still be suitable for thrombolysis and you should refer to your local thrombolysis guidelines.
 
