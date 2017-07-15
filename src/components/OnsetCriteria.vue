@@ -8,8 +8,8 @@
         .col-sm8
           q-inline-datetime(format24h v-model="onsetTime" type="datetime")
         .col-sm4
-          q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
-            p More than 12 hrs ago
+          //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
+          //-   p More than 12 hrs ago
           q-alert(v-if="minsSinceOnset < 0" color="negative")
             p Onset time is in the future
 

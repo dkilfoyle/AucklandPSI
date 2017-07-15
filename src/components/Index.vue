@@ -1,7 +1,10 @@
 <template lang="pug">
   q-layout(ref="layout" view="lHh LpR lFf")
     q-toolbar(slot="header")
-      q-toolbar-title Northern/Midlands Percutaneous Stroke Intervention Screening Tool
+      q-toolbar-title
+        |Northern/Midlands Percutaneous Stroke Intervention Screening Tool
+      q-chip(color="secondary") beta
+        q-tooltip Development version. Send any comments to Dean Kilfoyle
 
     .layout-padding(style="padding-top: 1rem")
         .flex.justify-center
@@ -10,7 +13,7 @@
               .col
                 q-card.bg-cyan-2
                   q-card-main
-                    p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval. Answer the questions below. <em>This version is still in development. Please report any necessary changes to Dean Kilfoyle.</em>
+                    p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval. Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist.
                     q-btn(@click="restart()") Restart
 
               div.col-sm4
@@ -60,7 +63,7 @@ export default {
   computed: {
     ...mapGetters(['onsetTime', 'minsSinceOnset', 'onsetCriteriaStatus', 'patientCriteriaStatus', 'scanCriteriaStatus']),
     isValidOnsetTime () {
-      return (this.minsSinceOnset >= 0 && this.minsSinceOnset < (12 * 60))
+      return (this.minsSinceOnset >= 0 && this.minsSinceOnset < (99 * 60))
     }
   },
   methods: {
