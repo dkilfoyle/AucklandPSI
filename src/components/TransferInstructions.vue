@@ -1,20 +1,54 @@
 <template lang="pug">
   div
-    q-card.bg-blue-2
+    table.q-table.horizontal-separator.bordered
+      thead
+        tr
+          th Summary
+          th
+      tbody
+        tr
+          td CT Finding
+          td {{ctfinding}} occlusion
+        tr
+          td Time of onset
+          td {{onsetTime}}
+        tr
+          td Elapsed Time
+          td {{minsSinceOnset|elapsedTime}}
+        tr
+          td Time remaining
+          td {{minsRemaining|elapsedTime}}
+    q-card.bg-blue-2.full-width
       q-card-main
         p
           ol
               li Call for an urgent helicopter transfer to Auckland Hospital. Instruct the transfer team to take the patient to Auckland Hospital resus where they will be briefly assessed prior to direct transfer to angiography suite.
               li Provide patient/family this information sheet explaining the procedure. Click <a href="./statics/patientinformation.pdf" download>HERE</a> to download.
-              li Obtain consent if patient able or NOK available. Do not delay transfer if NOK is not immediately available. Click HERE to download form (TODO)
               li If suitable for thrombolysis this should be initiated pre-transfer. The patient can be transferred with the infusion still running if necessary. Usual blood pressure parameters will need to be maintained.
           p(style="text-align:center") Pathway complete
 </template>
 
 <script>
+import { date } from 'quasar'
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
+    }
+  },
+  computed: {
+    ...mapGetters(['minsRemaining', 'minsSinceOnset', 'elapsedTime']),
+    onsetTime () { return (date.formatDate(this.$store.state.onsetCriteria.onsetTime, 'HH:mm')) },
+    ctfinding () { return (this.$store.state.scanCriteria.ctfinding) }
+  },
+  filters: {
+    elapsedTime: (value) => {
+      let hours = parseInt(Math.floor(value / 60))
+      let mins = parseInt(value % 60)
+      let dHours = (hours > 9 ? hours : '0' + hours)
+      let dMins = (mins > 9 ? mins : '0' + mins)
+      return (dHours + ':' + dMins)
     }
   }
 }

@@ -3,7 +3,7 @@
     q-toolbar(slot="header")
       q-toolbar-title
         |Northern/Midlands Percutaneous Stroke Intervention Screening Tool
-      q-chip(color="secondary") beta
+      q-chip(color="secondary" icon="build") beta
         q-tooltip Development version. Send any comments to Dean Kilfoyle
 
     .layout-padding(style="padding-top: 1rem")
@@ -13,8 +13,14 @@
               .col
                 q-card.bg-cyan-2
                   q-card-main
-                    p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval. Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist.
-                    q-btn(@click="restart()") Restart
+                    p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval. Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist. 
+                    .row
+                      .col
+                        q-field(label="Hospital")
+                          q-select(v-model="dhbhospital", :options="dhbHospitalOptions")
+                      .col
+                        q-field.float-right
+                          q-btn(@click="restart()" icon="cached") Restart
 
               div.col-sm4
                 q-card.bg-light.text-black
@@ -35,7 +41,7 @@
                 scan-criteria
                 q-stepper-navigation(v-if="scanCriteriaStatus")
                   q-btn(color="primary" @click="$refs.stepper.next()") Continue to Transfer Instructions
-              q-step(name="transferInstructions" title="Transfer Instructions" icon="airplanemode_active" active-icon="airplanemode_active")
+              q-step(name="transferInstructions" title="Transfer Instructions" icon="flight" active-icon="flight")
                 transfer-instructions
 </template>
 
@@ -57,13 +63,33 @@ export default {
   },
   data () {
     return {
-
-    }
+      dhbHospitalOptions: [
+        {
+          label: 'Waikato',
+          value: 'waikato'
+        },
+        {
+          label: 'Rotorua',
+          value: 'rotorua'
+        },
+        {
+          label: 'Thames',
+          value: 'thames'
+        },
+        {
+          label: 'Tauranga',
+          value: 'tauranga'
+        }
+      ]}
   },
   computed: {
     ...mapGetters(['onsetTime', 'minsSinceOnset', 'onsetCriteriaStatus', 'patientCriteriaStatus', 'scanCriteriaStatus']),
     isValidOnsetTime () {
       return (this.minsSinceOnset >= 0 && this.minsSinceOnset < (99 * 60))
+    },
+    dhbhospital: {
+      get () { return this.$store.state.dhbhospital },
+      set (value) { this.$store.commit('setDHBHospital', value) }
     }
   },
   methods: {

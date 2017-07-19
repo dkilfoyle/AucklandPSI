@@ -11,13 +11,6 @@ const module = {
     },
     minsSinceOnset: state => {
       return (date.getDateDiff(Date.now(), state.onsetTime, 'minutes'))
-    },
-    elapsedTime: (state, getters) => {
-      let hours = parseInt(Math.floor(getters.minsSinceOnset / 60))
-      let mins = parseInt(getters.minsSinceOnset % 60)
-      let dHours = (hours > 9 ? hours : '0' + hours)
-      let dMins = (mins > 9 ? mins : '0' + mins)
-      return (dHours + ':' + dMins)
     }
   },
   mutations: {
