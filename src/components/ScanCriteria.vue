@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     p CTA (CT angiography) is a mandatory pre-requisite. If your hospital does not have CTA capability the patient should be transfered to your nearest CTA capable hospital.
-    q-list(style="margin-bottom: 20px")
+    q-list(style="margin-bottom: 20px" highlight)
       q-item(tag="label")
         q-item-side
           q-checkbox(v-model="nobleed")
@@ -36,25 +36,37 @@
         li If the patient is still within 4.5h of onset they may be suitable for thrombolysis in addition to clot retrieval.
 
     mixin neuroaccepted
-      q-list(no-border)
+      q-list(no-border highlight)
         q-item(tag="label")
           q-item-side
             q-checkbox(v-model="neurologistaccepted")
           q-item-tile(label) Has the patient been accepted by the Auckland Hospital on-call neurologist for transfer?
 
     q-card.passing(v-if="isAnterior && minsSinceOnset < 360").fullwidth
+      q-card-title
+        |Scan Criteria Met
+        q-icon(slot="right" name="pass")
+      q-card-separator  
       q-card-main
         p The patient is within 6h of symptom onset with an occluded anterior circulation artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
     q-card.passing(v-else-if="isPosterior && minsSinceOnset < 720").fullwidth
+      q-card-title
+        |Scan Criteria Met (basilar only)
+        q-icon(slot="right" name="pass")
+      q-card-separator  
       q-card-main
         p The patient is within 12h of symptom onset with an occluded basilar artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
     q-card.failing(v-else).fullwidth
+      q-card-title
+        |Scan Criteria NOT Met
+        q-icon(slot="right" name="cancel")
+      q-card-separator  
       q-card-main
         div(v-if="ctfinding==='other'")
           p You have selected 'other' occlusion. Only ICA, MCA and basilar occlusions are suitable for PSI. Isolated occlusions of ACA, PCA or single vertebral are usually not appropriate for PSI.
