@@ -69,6 +69,10 @@ export default {
           value: 'waikato'
         },
         {
+          label: 'Whangarei',
+          value: 'whangarei'
+        },
+        {
           label: 'Rotorua',
           value: 'rotorua'
         },
@@ -79,6 +83,10 @@ export default {
         {
           label: 'Tauranga',
           value: 'tauranga'
+        },
+        {
+          label: 'Taupo',
+          value: 'taupo'
         }
       ]}
   },
@@ -153,4 +161,6 @@ export default {
 .png-pass { background-image: url('~assets/pass.png'); }
 .png-cancel { background-image: url('~assets/cancel.png'); }
 .png-brain { background-image: url('~assets/brain.png'); }
+.png-warning { background-image: url('~assets/warning.png'); }
+.png-warningw { background-image: url('~assets/warningw.png'); }
 </style>
