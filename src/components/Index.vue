@@ -9,6 +9,8 @@
       q-chip(color="secondary" icon="build") beta
         q-tooltip Development version. Send any comments to Dean Kilfoyle
 
+    NIHSS(slot="left")
+
     .layout-padding(style="padding-top: 1rem")
         .flex.justify-center
           div(style="width: 900px; max-width: 90vw")
@@ -53,6 +55,7 @@ import PatientCriteria from './PatientCriteria.vue'
 import ScanCriteria from './ScanCriteria.vue'
 import TransferInstructions from './TransferInstructions.vue'
 import ElapsedTime from './ElapsedTime.vue'
+import NIHSS from './NIHSS.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -61,7 +64,8 @@ export default {
     PatientCriteria,
     ScanCriteria,
     TransferInstructions,
-    ElapsedTime
+    ElapsedTime,
+    NIHSS
   },
   data () {
     return {
@@ -150,6 +154,7 @@ icons = keyboard_arrow_right,
  check_box_outline_blank,
  check_box,
  radio_button_unchecked,
+ radio_button_checked,
  check,
  pass,
  cancel,
