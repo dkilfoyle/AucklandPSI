@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-layout(ref="layout" view="lHh LpR lFf")
+  q-layout(ref="layout" view="lHh lpR lFf" left-breakpoint="10000")
     q-toolbar(slot="header")
       q-btn(flat @click="$refs.layout.toggleLeft()")
         q-icon(name="menu")

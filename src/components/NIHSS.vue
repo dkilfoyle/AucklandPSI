@@ -1,89 +1,113 @@
 <template lang="pug">
 div
-  h6(style="text-align:center;") NIHSS = {{nihss}}
-  q-field(label="1B: LOC/Orientation" helper="Ask month and age. Score 2 if aphasic." labelWidth=11)
-    q-select(v-model="loc" :options=`[
+    h6(style="text-align:center;") NIHSS = {{nihss}}
+    //- q-field(label="1B: LOC/Orientation" helper="Ask month and age. Score 2 if aphasic.")
+    p.caption1 1B: LOC/Orientation
+    p.caption2 Ask month and age. Score 2 if aphasic.
+    q-select.close(v-model="loc" :options=`[
       { label: '0 = Both responses correct', value: 0 },
       { label: '1 = 1 response correct', value: 1 },
       { label: '2 = None correct/no response', value: 2}]`)
-  q-field(label="1C: LOC/Commands" helper="Ask close eyes, squeeze hand. Pantomine if communication barrier." labelWidth=11)
-    q-select(v-model="obey" :options=`[
+
+    p.caption1 1C: LOC/Commands
+    p.caption2 Ask close eyes, squeeze hand. Pantomine if communication barrier.
+    q-select.close(v-model="obey" :options=`[
       { label: '0 = Both tasks correct', value: 0 },
       { label: '1 = 1 task correct', value: 1 },
       { label: '2 = 0 tasks correct', value: 2} ]`)
-  q-field(label="2: Horizontal eye movement" labelWidth="11")
-    q-select(v-model="gaze" :options=`[
+
+    p.caption1 2: Horizontal eye movement
+    q-select.close(v-model="gaze" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Partial gaze palsy to 1 or both sides', value: 1 },
       { label: '2 = Forced deviation or total gaze palsy not overcome by dolls eye', value: 2} ]`)
-  q-field(label="3: Visual fields" helper="Test blink response to visual threat if communication barrier. " labelWidth=11)
-    q-select(v-model="vf" :options=`[
+
+    p.caption1 3: Visual fields
+    p.caption2 Test blink response to visual threat if communication barrier. 
+    q-select.close(v-model="vf" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Partial hemianopia', value: 1 },
       { label: '2 = Complete hemianopia', value: 2},
       { label: '3 = Bilateral hemianopia or no blink in any field', value: 3} ]`)
-  q-field(label="4: Facial palsy" helper="Use grimace if obtunded. Pantomine if aphasic." labelWidth=11)
-    q-select(v-model="facial" :options=`[
+
+    p.caption1 4: Facial palsy
+    p.caption2 Use grimace if obtunded. Pantomine if aphasic.
+    q-select.close(v-model="facial" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Minor asymetry', value: 1 },
       { label: '2 = Partial', value: 2},
       { label: '3 = Unilateral or bilateral complete paralysis or no response', value: 3} ]`)
-  q-field(label="5A: Left arm motor drift" labelWidth=11)
-    q-select(v-model="leftarm" :options=`[
+
+    p.caption1 5A: Left arm motor drift
+    q-select.close(v-model="leftarm" :options=`[
       { label: '0 = No drift', value: 0 },
       { label: '1 = Drift, doesnt hit bed', value: 1 },
       { label: '2 = Arm hits bed', value: 2},
       { label: '3 = No effort against gravity', value: 3},
       { label: '4 = No movement', value: 4} ]`)
-  q-field(label="5B: Right arm motor drift" labelWidth=11)
-    q-select(v-model="rightarm" :options=`[
+
+    p.caption1 5B: Right arm motor drift"
+    q-select.close(v-model="rightarm" :options=`[
       { label: '0 = No drift', value: 0 },
       { label: '1 = Drift, doesnt hit bed', value: 1 },
       { label: '2 = Arm hits bed', value: 2},
       { label: '3 = No effort against gravity', value: 3},
       { label: '4 = No movement', value: 4} ]`)
-  q-field(label="6A: Left leg motor drift" labelWidth=11)
-    q-select(v-model="leftleg" :options=`[
+
+    p.caption1 6A: Left leg motor drift
+    q-select.close(v-model="leftleg" :options=`[
       { label: '0 = No drift', value: 0 },
       { label: '1 = Drift, doesnt hit bed', value: 1 },
       { label: '2 = Leg hits bed', value: 2},
       { label: '3 = No effort against gravity', value: 3},
       { label: '4 = No movement', value: 4} ]`)
-  q-field(label="6B: Right leg motor drift" labelWidth=11)
-    q-select(v-model="rightleg" :options=`[
+
+    p.caption1 6B: Right leg motor drift
+    q-select.close(v-model="rightleg" :options=`[
       { label: '0 = No drift', value: 0 },
       { label: '1 = Drift, doesnt hit bed', value: 1 },
       { label: '2 = Leg hits bed', value: 2},
       { label: '3 = No effort against gravity', value: 3},
       { label: '4 = No movement', value: 4} ]`)
-  q-field(label="7: Limb ataxia" helper="FNF/Heel-shin. Score 0 if cant obey or paralyzed." labelWidth=11)
-    q-select(v-model="limbataxia" :options=`[
+
+    p.caption1 7: Limb ataxia
+    p.caption2 FNF/Heel-shin. Score 0 if cant obey or paralyzed.
+    q-select.close(v-model="limbataxia" :options=`[
       { label: '0 = No ataxia', value: 0 },
       { label: '1 = Ataxia in 1 limb', value: 1 },
       { label: '2 = Ataxia in 2 limbs', value: 2 } ]`)
-  q-field(label="8: Sensation" helper="Pinprick loss in face, arm or leg. Score worst location. Assess grimace if aphasic or coma. " labelWidth=11)
-    q-select(v-model="sensation" :options=`[
+
+    p.caption1 8: Sensation
+    p.caption2 Pinprick loss in face, arm or leg. Score worst location. Assess grimace if aphasic or coma. 
+    q-select.close(v-model="sensation" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Mild to moderate loss', value: 1 },
       { label: '2 = Severe to total loss', value: 2} ]`)
-  q-field(label="9: Language" helper="Score 3 if coma" labelWidth=11)
-    q-select(v-model="language" :options=`[
+
+    p.caption1 9: Language
+    p.caption2 Score 3 if coma
+    q-select.close(v-model="language" :options=`[
       { label: '0 = Normal. No dysphasia', value: 0 },
       { label: '1 = Mild-moderate dysphasia. Still able to communicate.', value: 1 },
       { label: '2 = Severe dysphasia. Hard to understand', value: 2},
       { label: '3 = Mute or complete loss of verbal comprehension', value: 3} ]`)
-  q-field(label="10: Dysarthria" helper="Score 2 if coma, or mute." labelWidth=11)
-    q-select(v-model="dysarthria" :options=`[
+
+    p.caption1 10: Dysarthria
+    p.caption2 Score 2 if coma, or mute
+    q-select.close(v-model="dysarthria" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Mild to moderate dysarthria. Still can be understood.', value: 1 },
       { label: '2 = Severe dysarthria. Unintelligible or mute.', value: 2} ]`)
-  q-field(label="11: Inattention" helper="Test bilateral simultaneous sensory and visual. Score 0 if coma, or hemianopia only or too confused to assess." labelWidth=11)
-    q-select(v-model="inattention" :options=`[
+
+    p.caption1 11: Inattention
+    p.caption2 Test bilateral simultaneous sensory and visual. Score 0 if coma, or hemianopia only or too confused to assess.
+    q-select.close(v-model="inattention" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Inattention to bilateral stimuli in 1 sensory modality', value: 1 },
       { label: '2 = Inattention to bilateral stimuli in both visual and sensory', value: 2} ]`)
-  .row.justify-center(style="padding-top:20px; padding-bottom:20px")
-    q-btn(@click="reset()" color="primary") Zero All
+      
+    .row.justify-center(style="padding-top:20px; padding-bottom:20px")
+      q-btn(@click="reset()" color="primary") Zero All
 </template>
 
 <script>
@@ -146,5 +170,21 @@ export default {
 </script>
 
 <style lang="stylus">
-
+.caption1 {
+  padding-bottom: 0px;
+  padding-top: 20px;
+  font-weight: 300;
+  margin-bottom: 0px;
+}
+.caption2 {
+  font-size: 12px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  color: rgba(0,0,0,0.46);
+  line-height: 16px;
+}
+.close {
+  margin-top:8px;
+}
 </style>
