@@ -45,7 +45,8 @@ import Quasar, {
   QStepperNavigation,
   QChip,
   QTooltip,
-  QOptionGroup
+  QOptionGroup,
+  QScrollArea
 } from 'quasar'
 
 import router from './router'
@@ -85,7 +86,8 @@ Vue.use(Quasar, {
     QStepperNavigation,
     QChip,
     QTooltip,
-    QOptionGroup
+    QOptionGroup,
+    QScrollArea
   }
 }) // Install Quasar Framework
 

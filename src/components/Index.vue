@@ -9,7 +9,8 @@
       q-chip(color="secondary" icon="build") beta
         q-tooltip Development version. Send any comments to Dean Kilfoyle
 
-    NIHSS(slot="left")
+    q-scroll-area(slot="left" style="width:100%; height:100%; padding-left:10px; padding-right:10px; padding-top:10px;").bg-grey-3
+      NIHSS
 
     .layout-padding(style="padding-top: 1rem")
         .flex.justify-center
