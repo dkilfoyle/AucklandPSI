@@ -1,11 +1,16 @@
 <template lang="pug">
   q-layout(ref="layout" view="lHh LpR lFf")
     q-toolbar(slot="header")
+      q-btn(flat @click="$refs.layout.toggleLeft()")
+        q-icon(name="menu")
       q-icon(name="brain")
-      q-toolbar-title
-        |Northern/Midlands Percutaneous Stroke Intervention Screening Tool
+      q-toolbar-title Auckland PSI
+        span(slot="subtitle") Northern/Midlands Percutaneous Stroke Intervention Screening Tool
       q-chip(color="secondary" icon="build") beta
         q-tooltip Development version. Send any comments to Dean Kilfoyle
+
+    q-scroll-area(slot="left" style="width:100%; height:100%; padding-left:10px; padding-right:10px; padding-top:10px;").bg-grey-3
+      NIHSS
 
     .layout-padding(style="padding-top: 1rem")
         .flex.justify-center
@@ -51,6 +56,7 @@ import PatientCriteria from './PatientCriteria.vue'
 import ScanCriteria from './ScanCriteria.vue'
 import TransferInstructions from './TransferInstructions.vue'
 import ElapsedTime from './ElapsedTime.vue'
+import NIHSS from './NIHSS.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -59,7 +65,8 @@ export default {
     PatientCriteria,
     ScanCriteria,
     TransferInstructions,
-    ElapsedTime
+    ElapsedTime,
+    NIHSS
   },
   data () {
     return {
@@ -144,23 +151,29 @@ export default {
     background-repeat: no-repeat;
 }
 
-.png-keyboard_arrow_right { background-image: url('~assets/keyboard_arrow_right.png'); }
-.png-keyboard_arrow_left { background-image: url('~assets/keyboard_arrow_left.png'); }
-.png-scanner { background-image: url('~assets/scannerw.png'); }
-.png-access_time { background-image: url('~assets/access_timew.png'); }
-.png-flight { background-image: url('~assets/flightw.png'); }
-.png-build { background-image: url('~assets/buildw.png'); }
-.png-cached { background-image: url('~assets/cached.png'); }
-.png-person { background-image: url('~assets/personw.png'); }
-.png-arrow_drop_down { background-image: url('~assets/arrow_drop_down.png'); }
-.png-check_box_outline_blank { background-image: url('~assets/check_box_outline_blank.png'); }
-.png-check_box { background-image: url('~assets/check_box.png'); }
-.png-radio_button_unchecked { background-image: url('~assets/radio_button_unchecked.png'); }
-.png-radio_button_checked { background-image: url('~assets/radio_button_checked.png'); }
-.png-check { background-image: url('~assets/checkw.png'); }
-.png-pass { background-image: url('~assets/pass.png'); }
-.png-cancel { background-image: url('~assets/cancel.png'); }
-.png-brain { background-image: url('~assets/brain.png'); }
-.png-warning { background-image: url('~assets/warning.png'); }
-.png-warningw { background-image: url('~assets/warningw.png'); }
+icons = keyboard_arrow_right,
+ keyboard_arrow_left,
+ scanner,
+ access_time,
+ flight,
+ build,
+ cached,
+ person,
+ arrow_drop_down,
+ check_box_outline_blank,
+ check_box,
+ radio_button_unchecked,
+ radio_button_checked,
+ check,
+ pass,
+ cancel,
+ brain,
+ menu,
+ warning,
+ warningw
+
+for iconname in icons
+  .png-{iconname}
+    background-image: url('~assets/' + iconname + '.png')
+
 </style>

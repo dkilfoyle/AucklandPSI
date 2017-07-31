@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    p CTA (CT angiography) is a mandatory pre-requisite. If your hospital does not have CTA capability the patient should be transfered to your nearest CTA capable hospital.
+    p CTA (CT angiography) is a mandatory pre-requisite. If CTA is not locally available the patient will not be suitable for PSI transfer.
     q-list(style="margin-bottom: 20px" highlight)
       q-item(tag="label")
         q-item-side
