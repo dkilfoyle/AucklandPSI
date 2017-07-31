@@ -10,8 +10,7 @@
         .col-sm4
           //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
           //-   p More than 12 hrs ago
-          q-alert(v-if="minsSinceOnset < 0" color="negative")
-            p Onset time is in the future
+          q-alert(v-if="minsSinceOnset < 0" color="negative" icon="warningw") Onset time is in the future
 
     q-card.passing(v-if="minsSinceOnset < (4.5*60) && minsSinceOnset >= 0").fullwidth
       q-card-title
