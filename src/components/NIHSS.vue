@@ -46,7 +46,7 @@ div
       { label: '3 = No effort against gravity', value: 3},
       { label: '4 = No movement', value: 4} ]`)
 
-    p.caption1 5B: Right arm motor drift"
+    p.caption1 5B: Right arm motor drift
     q-select.close(v-model="rightarm" :options=`[
       { label: '0 = No drift', value: 0 },
       { label: '1 = Drift, doesnt hit bed', value: 1 },
