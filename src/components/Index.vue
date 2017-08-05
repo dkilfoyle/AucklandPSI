@@ -1,5 +1,5 @@
 <template lang="pug">
-  q-layout(ref="layout" view="lHh lpR lFf" left-breakpoint="10000")
+  q-layout(ref="layout" view="hHh lpR lFf")
     q-toolbar(slot="header")
       q-btn(flat @click="$refs.layout.toggleLeft()")
         q-icon(name="menu")
@@ -113,7 +113,11 @@ export default {
       this.resetCriteria()
       this.$refs.stepper.reset()
     }
+  },
+  mounted () {
+    this.$refs.layout.hideLeft()
   }
+
 }
 </script>
 

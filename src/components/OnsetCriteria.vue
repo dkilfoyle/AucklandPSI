@@ -3,10 +3,12 @@
     p It is critically important to correctly establish the time of symptom onset. An incorrect time of onset may endanger the patient. If the patient awoke with symptoms then time of onset should be assumed to be when they fell asleep prior to waking. If the patient cannot provide any history then time of onset should be when last seen or known to be well.
     p Use the widget below to set both the date and time of symptom onset. Click on the time to change hours and minutes. Note 24h clock. The initial value defaults to 13 hours prior to current time.
 
+    h6 Enter Stroke Onset Time
+
     div
       .row.md-gutter.items-center(style="margin-bottom:20px")
         .col-sm8
-          q-inline-datetime(format24h v-model="onsetTime" type="datetime")
+          dk-inline-datetime(format24h v-model="onsetTime" type="datetime")
         .col-sm4
           //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
           //-   p More than 12 hrs ago
@@ -54,8 +56,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { DkInlineDatetime } from './dkdatetime'
 
 export default {
+  components: {
+    DkInlineDatetime
+  },
   data () {
     return {
     }
