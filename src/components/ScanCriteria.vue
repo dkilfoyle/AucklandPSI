@@ -65,7 +65,7 @@
     q-card.failing(v-else).fullwidth
       q-card-title
         |Scan Criteria NOT Met
-        q-icon(slot="right" name="cancel")
+        q-icon(slot="right" name="warning")
       q-card-separator  
       q-card-main
         div(v-if="ctfinding==='other'")

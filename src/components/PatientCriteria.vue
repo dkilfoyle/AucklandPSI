@@ -37,7 +37,7 @@ div
   q-card.failing(v-if="!patientCriteriaStatus").fullwidth
     q-card-title
       |Patient Criteria NOT Met
-      q-icon(slot="right" name="cancel")
+      q-icon(slot="right" name="warning")
     q-card-separator  
     q-card-main
       p The patient must meet all of the above criteria. Current responses in this section indicate the patient does not meet screening criteria for clot retrieval. The patient may still be suitable for thrombolysis and you should refer to your local thrombolysis guidelines.

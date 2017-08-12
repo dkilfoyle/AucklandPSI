@@ -20,7 +20,7 @@ export default new Vuex.Store({
     minsRemaining: (state, getters) => {
       if (state.scanCriteria.ctfinding === 'MCA') { return (6 * 60 - getters.minsSinceOnset) }
       if (state.scanCriteria.ctfinding === 'ICA') { return (6 * 60 - getters.minsSinceOnset) }
-      if (state.scanCriteria.ctfinding === 'Basilar') { return (12 * 60 - getters.minsSinceOnset) }
+      if (state.scanCriteria.ctfinding === 'basilar') { return (12 * 60 - getters.minsSinceOnset) }
     }
   },
   mutations: {

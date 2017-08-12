@@ -20,6 +20,7 @@
           td {{minsRemaining|elapsedTime}}
     q-card.bg-blue-2.full-width
       q-card-title Transfer Accepted
+        q-icon(slot="right" name="pass")
       q-card-main
         p
           ol
