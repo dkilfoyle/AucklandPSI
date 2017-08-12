@@ -8,7 +8,7 @@ div
       { label: '0 = Alert', value: 0 },
       { label: '1 = Arouses to minor stimulation eg voice', value: 1 },
       { label: '2 = Requires repeated stimulation or moves to pain', value: 2},
-      { label: '3 = Postures or unresponseive}]`)
+      { label: '3 = Postures or unresponseive', value: 3}]`)
 
     p.caption1 1B: LOC/Orientation
     p.caption2 Ask month and age. Score 2 if aphasic.
@@ -160,7 +160,8 @@ export default {
   },
   methods: {
     reset: function () {
-      this.loc = 0
+      this.alert = 0
+      this.orientation = 0
       this.obey = 0
       this.gaze = 0
       this.vf = 0
