@@ -2,9 +2,17 @@
 div
     h6(style="text-align:center;") NIHSS = {{nihss}}
     //- q-field(label="1B: LOC/Orientation" helper="Ask month and age. Score 2 if aphasic.")
+    p.caption1 1A: LOC/Alertness
+    p.caption2 Assess level of alertness
+    q-select.close(v-model="alert" :options=`[
+      { label: '0 = Alert', value: 0 },
+      { label: '1 = Arouses to minor stimulation eg voice', value: 1 },
+      { label: '2 = Requires repeated stimulation or moves to pain', value: 2},
+      { label: '3 = Postures or unresponseive}]`)
+
     p.caption1 1B: LOC/Orientation
     p.caption2 Ask month and age. Score 2 if aphasic.
-    q-select.close(v-model="loc" :options=`[
+    q-select.close(v-model="orientation" :options=`[
       { label: '0 = Both responses correct', value: 0 },
       { label: '1 = 1 response correct', value: 1 },
       { label: '2 = None correct/no response', value: 2}]`)
@@ -114,7 +122,8 @@ div
 export default {
   data () {
     return {
-      loc: 0,
+      alert: 0,
+      orientation: 0,
       obey: 0,
       gaze: 0,
       vf: 0,
@@ -132,7 +141,8 @@ export default {
   },
   computed: {
     nihss: function () {
-      return this.loc +
+      return this.alert +
+        this.orientation +
         this.obey +
         this.gaze +
         this.vf +
