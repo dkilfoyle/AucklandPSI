@@ -1,9 +1,7 @@
 <template lang="pug">
   div 
     p It is critically important to correctly establish the time of symptom onset. An incorrect time of onset may endanger the patient. If the patient awoke with symptoms then time of onset should be assumed to be when they fell asleep prior to waking. If the patient cannot provide any history then time of onset should be when last seen or known to be well.
-    p Use the widget below to set both the date and time of symptom onset. The initial value defaults to 13 hours prior to current time.
-
-    h6 Enter Stroke Onset Time
+    p Use the widget below to set the hour (24h clock) and then minute of stroke onset. Click on the date to change if necessary. The Stroke Onset time defaults to 13 hours prior to current time.
 
     div
       .row.md-gutter.items-center(style="margin-bottom:20px")
