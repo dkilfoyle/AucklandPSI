@@ -1,7 +1,7 @@
 <template lang="pug">
   div 
     p It is critically important to correctly establish the time of symptom onset. An incorrect time of onset may endanger the patient. If the patient awoke with symptoms then time of onset should be assumed to be when they fell asleep prior to waking. If the patient cannot provide any history then time of onset should be when last seen or known to be well.
-    p Use the widget below to set both the date and time of symptom onset. Click on the time to change hours and minutes. Note 24h clock. The initial value defaults to 13 hours prior to current time.
+    p Use the widget below to set both the date and time of symptom onset. The initial value defaults to 13 hours prior to current time.
 
     h6 Enter Stroke Onset Time
 
@@ -47,7 +47,7 @@
     q-card.failing(v-if="minsSinceOnset >= (12*60)").fullwidth
       q-card-title
         |Onset Criteria NOT Met
-        q-icon(slot="right" name="cancel")
+        q-icon(slot="right" name="warning")
       q-card-separator
       q-card-main
         p The patient is more than 12h post onset and is therefore not suitable for clot retrieval.

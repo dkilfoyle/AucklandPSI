@@ -245,20 +245,20 @@ export default {
     Ripple
   },
   data () {
-    let view
+    // let view
 
-    switch (this.type) {
-      case 'time':
-        view = 'hour'
-        break
-      case 'date':
-      default:
-        view = 'day'
-        break
-    }
+    // switch (this.type) {
+    //   case 'time':
+    //     view = 'hour'
+    //     break
+    //   case 'date':
+    //   default:
+    //     view = 'day'
+    //     break
+    // }
 
     return {
-      view,
+      view: 'hour',
       dragging: false,
       centerClockPos: 0
     }
@@ -448,7 +448,12 @@ export default {
       ev.stopPropagation()
       ev.preventDefault()
       this.dragging = false
-    //   this.view = 'minute'
+      if (this.view === 'minute') {
+        this.view = 'hour'
+      }
+      else {
+        this.view = 'minute'
+      }
     },
     __updateClock (ev) {
       let
