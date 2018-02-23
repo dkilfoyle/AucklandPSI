@@ -1,10 +1,10 @@
 {
-  "name": "test15",
-  "version": "1.0.0",
-  "description": "A Quasar Framework app",
+  "name": "auckland-psi",
+  "version": "0.0.1",
+  "description": "A Screening Tool for PSI at ACH",
+  "author": "Dean Kilfoyle",
   "productName": "Quasar App",
   "cordovaId": "org.cordova.quasar.app",
-  "author": "dkilfoyle <dkilfoyle@xtra.co.nz>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
