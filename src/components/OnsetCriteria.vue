@@ -6,7 +6,7 @@
     div
       .row.md-gutter.items-center(style="margin-bottom:20px")
         .col-sm8
-          dk-inline-datetime(format24h v-model="onsetTime" type="datetime")
+          q-datetime-picker(format24h v-model="onsetTime" type="datetime")
         .col-sm4
           //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
           //-   p More than 12 hrs ago
@@ -55,7 +55,12 @@
 export default {
   // name: 'ComponentName',
   data () {
-    return {}
+    return {
+      onsetTime: {
+        get () { return this.$store.state.onsetCriteria.onsetTime },
+        set (value) { this.$store.commit('setOnsetTime', value) }
+      }
+    }
   }
 }
 </script>
