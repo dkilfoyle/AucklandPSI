@@ -57,7 +57,9 @@ module.exports = function (ctx) {
         'QListHeader',
         'QItem',
         'QItemMain',
-        'QItemSide'
+        'QItemSide',
+        'QTooltip',
+        'QChip'
       ],
       directives: [
         'Ripple'
