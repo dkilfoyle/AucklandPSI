@@ -8,7 +8,7 @@
               .row.items-center
                 .col-sm
                   q-field(label="Hospital")
-                    q-select(v-model="dhbhospital", :options="dhbHospitalOptions")
+                    q-select(v-model="dhbHospital", :options="dhbHospitalOptions")
                 .col-sm
                   q-btn.float-right(@click="restart()" icon="cached") Restart
 
@@ -39,7 +39,42 @@
 </style>
 
 <script>
+import OnsetCriteria from 'components/OnsetCriteria.vue'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: {
+    OnsetCriteria
+  },
+  data () {
+    return {
+      dhbHospital: 'waikato',
+      dhbHospitalOptions: [
+        {
+          label: 'Waikato',
+          value: 'waikato'
+        },
+        {
+          label: 'Whangarei',
+          value: 'whangarei'
+        },
+        {
+          label: 'Rotorua',
+          value: 'rotorua'
+        },
+        {
+          label: 'Thames',
+          value: 'thames'
+        },
+        {
+          label: 'Tauranga',
+          value: 'tauranga'
+        },
+        {
+          label: 'Taupo',
+          value: 'taupo'
+        }
+      ]
+    }
+  }
 }
 </script>
