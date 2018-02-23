@@ -65,7 +65,9 @@ module.exports = function (ctx) {
         'QCardTitle',
         'QStepper',
         'QStepperNavigation',
-        'QStep'
+        'QStep',
+        'QField',
+        'QSelect'
       ],
       directives: [
         'Ripple'
