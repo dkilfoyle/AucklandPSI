@@ -88,6 +88,14 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    restart () {
+      this.$store.dispatch('onsetCriteria/resetOnsetCriteria')
+      this.$store.dispatch('patientCriteria/resetPatientCriteria')
+      this.$store.dispatch('scanCriteria/resetScanCriteria')
+      this.$refs.stepper.reset()
+    }
   }
 }
 </script>
