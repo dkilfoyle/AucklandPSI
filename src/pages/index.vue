@@ -3,9 +3,9 @@
       .row.items-center.justify-center.gutter-lg
         .col-sm-6
           q-card.bg-cyan-2
-            q-card-main
+            q-card-main.q-body-2
               p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval.
-              p Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist.
+              p Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist or stroke physician.
               .row.items-center
                 .col-sm
                   q-field(label="Hospital")

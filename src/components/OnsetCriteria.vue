@@ -4,13 +4,12 @@
     p Use the widget below to set the hour (24h clock) and then minute of stroke onset. Click on the date to change if necessary. The Stroke Onset time defaults to 13 hours prior to current time.
 
     div
-      .row.md-gutter.items-center(style="margin-bottom:20px")
-        .col-sm8
-          q-datetime-picker(format24h v-model="onsetTime" type="datetime")
-        .col-sm4
-          //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
-          //-   p More than 12 hrs ago
-          q-alert(v-if="minsSinceOnset < 0" color="negative" icon="warningw") Onset time is in the future
+      .row.justify-center(style="margin-bottom:20px")
+        q-datetime-picker(format24h v-model="onsetTime" type="datetime").relative-position
+        //- q-alert(v-if="minsSinceOnset > (12 * 60)" color="negative")
+        //-   p More than 12 hrs ago
+      .row.justify-center
+        q-alert(v-if="minsSinceOnset < 0" color="negative" icon="warning") Onset time is in the future
 
     q-card.passing(v-if="minsSinceOnset < (4.5*60) && minsSinceOnset >= 0").fullwidth
       q-card-title
@@ -31,13 +30,13 @@
           q-card-main.failing
             p WARNING: The patient is within <b>{{(6*60)-minsSinceOnset}} minutes</b> of the upper limit of the treatment window. The patient must complete the rest of the pathway AND arrive at Auckland Hospital within the next {{(6*60)-minsSinceOnset}}minutes in order to be treatable. If that is not feasible then do not continue with this pathway.
 
-    q-card.passing(v-if="minsSinceOnset >= (6*60) && minsSinceOnset < (12*60)").fullwidth
+    q-card.passing(v-if="minsSinceOnset >= (6*60) && minsSinceOnset < (24*60)").fullwidth
       q-card-title
         |Onset Criteria Met
         q-icon(slot="right" name="pass")
       q-card-separator
       q-card-main
-        p The patient is between 6h and 12h post symptom onset. The only remaining indication for clot retrieval in this time period is a <b>basilar occlusion</b>. Patients with ICA or MCA occlusion are now excluded.
+        p The patient is between 6h and 24h post symptom onset. The only remaining indication for clot retrieval in this time period is a <b>basilar occlusion</b>. Patients with ICA or MCA occlusion are now excluded.
         q-card(v-if="minsSinceOnset > 11*60" style="margin-bottom:10px;")
           q-card-main.failing
             p WARNING: The patient is within <b>{{(12*60)-minsSinceOnset}} minutes</b> of the upper limit of the treatment window for a basilar occlusion. The patient must complete the rest of the pathway AND arrive at Auckland Hospital within the next {{(12*60)-minsSinceOnset}} minutes in order to be treatable. If that is not feasible then do not continue with this pathway.

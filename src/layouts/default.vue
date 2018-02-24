@@ -8,7 +8,7 @@
         q-toolbar-title Auckland PSI
           div(slot="subtitle") Northern/Midlands Percutaneous Stroke Intervention Screening Tool
         div
-          q-chip(color="secondary" icon="build") beta
+          q-chip(color="secondary" icon="build" small) beta
           q-tooltip Development version. Send any comments to Dean Kilfoyle
 
     q-layout-drawer(v-model="leftDrawerOpen"  content-class="bg-grey-2")
