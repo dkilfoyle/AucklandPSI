@@ -24,16 +24,14 @@ export default {
     getCurrent () {
       if (this.isvalid === false) {
         return ('??')
-      }
-      else {
+      } else {
         return (this.current < 10 && this.current > -1 ? '0' : '') + this.current
       }
     },
     getPrevious () {
       if (this.isvalid === false) {
         return ('??')
-      }
-      else {
+      } else {
         return (this.previous < 10 && this.previous > -1 ? '0' : '') + this.previous
       }
     }
@@ -101,9 +99,6 @@ export default {
     font-size: 3rem;
   }
 }
-
-
-/*////////////////////////////////////////*/
 
 .flip-card__top,
 .flip-card__bottom,

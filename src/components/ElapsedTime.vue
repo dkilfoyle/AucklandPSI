@@ -1,7 +1,7 @@
 <template>
   <div class="flip-clock" data-date="2017-07-01 12:00:00" @click="update">
-    <tracker property="Hours" :time="hours" :isvalid="isvalid"></tracker>
-    <tracker property="Minutes" :time="minutes" :isvalid="isvalid"></tracker>
+    <tracker property="Hours" :time="hours" :isvalid="(hours<=99 && hours>=0)"></tracker>
+    <tracker property="Minutes" :time="minutes" :isvalid="(minutes<=59 && minutes>=0)"></tracker>
   </div>
 </template>
 
@@ -17,6 +17,12 @@ export default {
     minutes: 0,
     i: 0
   }),
+
+  computed: {
+    isValidTime () {
+      return (this.hours >= 0 && this.hours <= 99)
+    }
+  },
 
   components: {
     Tracker
@@ -42,8 +48,7 @@ export default {
         var emins = date.getDateDiff(Date.now(), this.date, 'minutes')
         this.hours = parseInt(Math.floor(emins / (60)))
         this.minutes = parseInt(Math.floor(emins % 60))
-      }
-      else {
+      } else {
         this.hours = 0
         this.minutes = 0
       }

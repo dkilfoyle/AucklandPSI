@@ -31,7 +31,7 @@ div
       { label: '2 = Forced deviation or total gaze palsy not overcome by dolls eye', value: 2} ]`)
 
     p.caption1 3: Visual fields
-    p.caption2 Test blink response to visual threat if communication barrier. 
+    p.caption2 Test blink response to visual threat if communication barrier.
     q-select.close(v-model="vf" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Partial hemianopia', value: 1 },
@@ -86,7 +86,7 @@ div
       { label: '2 = Ataxia in 2 limbs', value: 2 } ]`)
 
     p.caption1 8: Sensation
-    p.caption2 Pinprick loss in face, arm or leg. Score worst location. Assess grimace if aphasic or coma. 
+    p.caption2 Pinprick loss in face, arm or leg. Score worst location. Assess grimace if aphasic or coma.
     q-select.close(v-model="sensation" :options=`[
       { label: '0 = Normal', value: 0 },
       { label: '1 = Mild to moderate loss', value: 1 },
@@ -113,7 +113,7 @@ div
       { label: '0 = Normal', value: 0 },
       { label: '1 = Inattention to bilateral stimuli in 1 sensory modality', value: 1 },
       { label: '2 = Inattention to bilateral stimuli in both visual and sensory', value: 2} ]`)
-      
+
     .row.justify-center(style="padding-top:20px; padding-bottom:20px")
       q-btn(@click="reset()" color="primary") Zero All
 </template>

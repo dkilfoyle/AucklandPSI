@@ -27,6 +27,16 @@
         q-item-side
           q-radio(v-model="ctfinding", val="other")
         q-item-tile(label) Other Occlusion
+      q-list-header(v-if="needCTP") Anterior Circulation 6-24h:
+      q-item(tag="label" v-if="needCTP")
+        q-item-side
+          q-checkbox(v-model="ctpcore")
+        q-item-tile(label) Confirm CTP core is < 70ml?
+      q-item(tag="label" v-if="needCTP")
+        q-item-side
+          q-checkbox(v-model="ctpperfusion")
+        q-item-tile(label) Confirm CTP perfusion defect is > 1.8 times the core volume?
+      q-alert(v-if="needCTP" type="warning" style="margin: 20px") Ideally CTP core and perfusion defect should be calculated by a dedicated software algorithm. If this is unavailable then a <b>local</b> radiologist review confirming a "small" infarct core with a "large" perfusion defect is adequate. If you do not have CTP capability then MRI DWI can provide a measure of infarct core.
 
     mixin ctinstructions
       ol
@@ -42,23 +52,33 @@
             q-checkbox(v-model="neurologistaccepted")
           q-item-tile(label) Has the patient been accepted by the Auckland Hospital on-call neurologist for transfer?
 
-    q-card.passing(v-if="isAnterior && minsSinceOnset < 360").fullwidth
+    q-card.passing(v-if="isAnterior && minsSinceOnset < 6 * 60").fullwidth
       q-card-title
-        |Scan Criteria Met
+        |0-6h Scan Criteria Met
         q-icon(slot="right" name="pass")
-      q-card-separator  
+      q-card-separator
       q-card-main
         p The patient is within 6h of symptom onset with an occluded anterior circulation artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
-    q-card.passing(v-else-if="isPosterior && minsSinceOnset < 720").fullwidth
+    q-card.passing(v-else-if="isAnterior && minsSinceOnset > 6 * 60 && minsSinceOnset < 24 * 60 && ctpcore && ctpperfusion").fullwidth
       q-card-title
-        |Scan Criteria Met (basilar only)
+        |6-24h Scan Criteria Met
         q-icon(slot="right" name="pass")
-      q-card-separator  
+      q-card-separator
       q-card-main
-        p The patient is within 12h of symptom onset with an occluded basilar artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
+        p The patient is within 6-24h of symptom onset with an occluded anterior circulation artery and a favourable CT perfusion pattern. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
+          +ctinstructions
+          +neuroaccepted
+
+    q-card.passing(v-else-if="isPosterior && minsSinceOnset < 24 * 60").fullwidth
+      q-card-title
+        |Posterior Circulation Scan Criteria Met
+        q-icon(slot="right" name="pass")
+      q-card-separator
+      q-card-main
+        p The patient is within 24h of symptom onset with an occluded basilar artery. The patient may be a candidate for transfer to Auckland Hospital for urgent endovascular clot retreival. Please do the following immediately:
           +ctinstructions
           +neuroaccepted
 
@@ -66,7 +86,7 @@
       q-card-title
         |Scan Criteria NOT Met
         q-icon(slot="right" name="warning")
-      q-card-separator  
+      q-card-separator
       q-card-main
         div(v-if="ctfinding==='other'")
           p You have selected 'other' occlusion. Only ICA, MCA and basilar occlusions are suitable for PSI. Isolated occlusions of ACA, PCA or single vertebral are usually not appropriate for PSI.
@@ -83,18 +103,30 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['minsSinceOnset', 'isAnterior', 'isPosterior', 'scanCriteriaStatus']),
+    ...mapGetters('scanCriteria', ['isAnterior', 'isPosterior', 'scanCriteriaStatus']),
+    ...mapGetters('onsetCriteria', ['minsSinceOnset']),
+    needCTP () {
+      return (this.minsSinceOnset > 6 * 60 && this.isAnterior)
+    },
     nobleed: {
       get () { return this.$store.state.scanCriteria.nobleed },
-      set (value) { this.$store.commit('setNoBleed', value) }
+      set (value) { this.$store.commit('scanCriteria/setNoBleed', value) }
     },
     ctfinding: {
       get () { return this.$store.state.scanCriteria.ctfinding },
-      set (value) { this.$store.commit('setCTFinding', value) }
+      set (value) { this.$store.commit('scanCriteria/setCTFinding', value) }
     },
     neurologistaccepted: {
       get () { return this.$store.state.scanCriteria.neurologistaccepted },
-      set (value) { this.$store.commit('setNeurologistAccepted', value) }
+      set (value) { this.$store.commit('scanCriteria/setNeurologistAccepted', value) }
+    },
+    ctpcore: {
+      get () { return this.$store.state.scanCriteria.ctpcore },
+      set (value) { this.$store.commit('scanCriteria/setCtpcore', value) }
+    },
+    ctpperfusion: {
+      get () { return this.$store.state.scanCriteria.ctpperfusion },
+      set (value) { this.$store.commit('scanCriteria/setCtpperfusion', value) }
     }
   }
 }
