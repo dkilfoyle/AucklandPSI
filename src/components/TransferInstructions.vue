@@ -8,7 +8,7 @@
         p
           ol
               li Call for an urgent helicopter transfer to Auckland Hospital. Instruct the transfer team to take the patient to Auckland Hospital resus where they will be briefly assessed prior to direct transfer to angiography suite.
-              li Provide patient/family this information sheet explaining the procedure. Click <a href="/AucklandPSI/statics/patientinformation.pdf" download>HERE</a> to download.
+              li Provide patient/family this information sheet explaining the procedure. Click <a href="statics/patientinformation.pdf" download>HERE</a> to download.
               li If suitable for thrombolysis this should be initiated pre-transfer. The patient can be transferred with the infusion still running if necessary. Usual blood pressure parameters will need to be maintained.
           p(style="text-align:center") Pathway complete
 </template>
