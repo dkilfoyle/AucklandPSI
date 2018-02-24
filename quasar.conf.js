@@ -68,7 +68,8 @@ module.exports = function (ctx) {
         'QStep',
         'QField',
         'QSelect',
-        'QDatetimePicker'
+        'QDatetimePicker',
+        'QCardSeparator'
       ],
       directives: [
         'Ripple'

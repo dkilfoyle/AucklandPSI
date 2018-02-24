@@ -52,14 +52,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   // name: 'ComponentName',
   data () {
-    return {
-      onsetTime: {
-        get () { return this.$store.state.onsetCriteria.onsetTime },
-        set (value) { this.$store.commit('setOnsetTime', value) }
-      }
+    return {}
+  },
+  computed: {
+    ...mapGetters('onsetCriteria', ['minsSinceOnset', 'elapsedTime']),
+    onsetTime: {
+      get () { return this.$store.state.onsetCriteria.onsetTime },
+      set (value) { this.$store.commit('onsetCriteria/setOnsetTime', value) }
     }
   }
 }

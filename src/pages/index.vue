@@ -1,10 +1,11 @@
 <template lang="pug">
   q-page(padding style="width:900px; max-width: 90vw")
       .row.items-center.justify-center.gutter-lg
-        .col-sm-8
+        .col-sm-6
           q-card.bg-cyan-2
             q-card-main
-              p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval. Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist.
+              p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval.
+              p Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist.
               .row.items-center
                 .col-sm
                   q-field(label="Hospital")
@@ -12,11 +13,11 @@
                 .col-sm
                   q-btn.float-right(@click="restart()" icon="cached") Restart
 
-        .col-sm-4
+        .col-sm-6
           q-card.bg-light.text-black
             q-card-title(style="text-align:center") Time Since Stroke Onset
             q-card-main
-              elapsed-time(:date="onsetTime" :isvalid="isValidOnsetTime")
+              elapsed-time(:date="onsetTime")
 
       q-stepper(ref="stepper" style="margin-top:20px" contractable)
         q-step(name="onsetTime" default title="Onset Criteria" icon="access_time" active-icon="access_time")
@@ -35,15 +36,25 @@
           transfer-instructions
 </template>
 
-<style>
-</style>
-
 <script>
 import OnsetCriteria from 'components/OnsetCriteria.vue'
+import PatientCriteria from 'components/PatientCriteria.vue'
+import ScanCriteria from 'components/ScanCriteria.vue'
+import TransferInstructions from 'components/TransferInstructions.vue'
+import ElapsedTime from 'components/ElapsedTime.vue'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PageIndex',
   components: {
-    OnsetCriteria
+    OnsetCriteria,
+    PatientCriteria,
+    ScanCriteria,
+    TransferInstructions,
+    ElapsedTime
+  },
+  computed: {
+    ...mapGetters('onsetCriteria', ['onsetCriteriaStatus', 'onsetTime'])
   },
   data () {
     return {
@@ -78,3 +89,15 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+@import '~variables'
+
+.passing {
+  background-color: $green-2
+}
+
+.failing {
+  background-color: $amber-2
+}
+</style>
