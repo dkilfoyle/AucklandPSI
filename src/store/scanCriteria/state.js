@@ -1,5 +1,7 @@
 export default {
   nobleed: true,
   ctfinding: 'No Occlusion',
-  neurologistaccepted: false
+  neurologistaccepted: false,
+  ctpcore: false,
+  ctpperfusion: false
 }

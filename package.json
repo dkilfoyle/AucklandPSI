@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Screening Tool for PSI at ACH",
   "author": "Dean Kilfoyle",
-  "productName": "Quasar App",
+  "productName": "Auckland PSI",
   "cordovaId": "org.cordova.quasar.app",
   "private": true,
   "scripts": {

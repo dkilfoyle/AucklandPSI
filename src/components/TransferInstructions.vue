@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    q-table(title="Summary" :data="tableData" :columns="columns" row-key="name" hide-bottom)
+    q-table(title="Patient Summary" :data="tableData" :columns="columns" row-key="name" hide-bottom hide-header)
     q-card.bg-blue-2.full-width(style="margin-top: 20px")
       q-card-title Transfer Accepted
         q-icon(slot="right" name="pass")
@@ -23,30 +23,47 @@ export default {
       columns: [
         {
           name: 'criteria',
+          label: 'Criterion',
           field: 'item',
           align: 'left'
         },
         {
           name: 'value',
-          field: 'value'
+          field: 'value',
+          label: 'Value'
         }
       ]
     }
   },
   computed: {
     ...mapGetters('onsetCriteria', ['minsSinceOnset']),
+    ...mapGetters('scanCriteria', ['isCTPFavourable']),
     onsetTime () { return (date.formatDate(this.$store.state.onsetCriteria.onsetTime, 'HH:mm')) },
     ctfinding () { return (this.$store.state.scanCriteria.ctfinding) },
+    ctpfinding () {
+      if (this.isCTPFavourable) {
+        return 'Favourable'
+      } else {
+        return 'NA'
+      }
+    },
     minsRemaining () {
-      if (this.$store.state.scanCriteria.ctfinding === 'MCA') { return (6 * 60 - this.minsSinceOnset) }
-      if (this.$store.state.scanCriteria.ctfinding === 'ICA') { return (6 * 60 - this.minsSinceOnset) }
-      if (this.$store.state.scanCriteria.ctfinding === 'basilar') { return (12 * 60 - this.minsSinceOnset) }
+      var maxmins = 0
+      if (this.isCTPFavourable) {
+        maxmins = 24 * 60
+      } else {
+        maxmins = 6 * 60
+      }
+      if (this.$store.state.scanCriteria.ctfinding === 'MCA') { return (maxmins - this.minsSinceOnset) }
+      if (this.$store.state.scanCriteria.ctfinding === 'ICA') { return (maxmins - this.minsSinceOnset) }
+      if (this.$store.state.scanCriteria.ctfinding === 'basilar') { return (24 * 60 - this.minsSinceOnset) }
     },
     tableData () {
       return [
-        { item: 'CT finding', value: this.ctfinding },
         { item: 'Time of Onset', value: this.onsetTime },
         { item: 'Elapsed Time', value: this.elapsedTime(this.minsSinceOnset) },
+        { item: 'CTA finding', value: this.ctfinding },
+        { item: 'CTP finding', value: this.ctpfinding },
         { item: 'Time remaining', value: this.elapsedTime(this.minsRemaining) }
       ]
     }
