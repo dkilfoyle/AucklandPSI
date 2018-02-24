@@ -54,7 +54,9 @@ export default {
     ElapsedTime
   },
   computed: {
-    ...mapGetters('onsetCriteria', ['onsetCriteriaStatus', 'onsetTime'])
+    ...mapGetters('onsetCriteria', ['onsetCriteriaStatus', 'onsetTime']),
+    ...mapGetters('patientCriteria', ['patientCriteriaStatus']),
+    ...mapGetters('scanCriteria', ['scanCriteriaStatus'])
   },
   data () {
     return {

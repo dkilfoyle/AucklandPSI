@@ -58,6 +58,7 @@ module.exports = function (ctx) {
         'QItem',
         'QItemMain',
         'QItemSide',
+        'QItemTile',
         'QTooltip',
         'QChip',
         'QCard',
@@ -69,7 +70,10 @@ module.exports = function (ctx) {
         'QField',
         'QSelect',
         'QDatetimePicker',
-        'QCardSeparator'
+        'QCardSeparator',
+        'QCheckbox',
+        'QRadio',
+        'QTable'
       ],
       directives: [
         'Ripple'
