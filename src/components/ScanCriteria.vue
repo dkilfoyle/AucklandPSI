@@ -36,7 +36,7 @@
         q-item-side
           q-checkbox(v-model="ctpperfusion")
         q-item-tile(label) Confirm CTP perfusion defect is > 1.8 times the core volume?
-      q-alert(v-if="needCTP" type="warning" style="margin: 20px") Ideally CTP core and perfusion defect should be calculated by a dedicated software algorithm. If this is unavailable then a <b>local</b> radiologist review confirming a "small" infarct core with a "large" perfusion defect is adequate.
+      q-alert(v-if="needCTP" type="warning" style="margin: 20px") Ideally CTP core and perfusion defect should be calculated by a dedicated software algorithm. If this is unavailable then a <b>local</b> radiologist review confirming a "small" infarct core with a "large" perfusion defect is adequate. If you do not have CTP capability then MRI DWI can provide a measure of infarct core.
 
     mixin ctinstructions
       ol

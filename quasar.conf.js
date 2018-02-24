@@ -74,7 +74,8 @@ module.exports = function (ctx) {
         'QCheckbox',
         'QRadio',
         'QTable',
-        'QAlert'
+        'QAlert',
+        'QScrollArea'
       ],
       directives: [
         'Ripple'

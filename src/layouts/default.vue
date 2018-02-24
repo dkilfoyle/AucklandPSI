@@ -11,12 +11,9 @@
           q-chip(color="secondary" icon="build" small) beta
           q-tooltip Development version. Send any comments to Dean Kilfoyle
 
-    q-layout-drawer(v-model="leftDrawerOpen"  content-class="bg-grey-2")
-      q-list(no-border link inset-delimiter)
-        q-list-header Essential Links
-        q-item(@click.native="openURL('http://quasar-framework.org')")
-          q-item-side(icon="school")
-          q-item-main(label="Docs" sublabel="quasar-framework.org")
+    q-layout-drawer(v-model="leftDrawerOpen" content-class="bg-grey-2" overlay)
+      q-scroll-area(style="width:100%; height:100%; padding-left:10px; padding-right:10px; padding-top:10px;").bg-grey-3
+        NIHSS
 
     q-page-container
       router-view
@@ -25,9 +22,13 @@
 
 <script>
 import { openURL } from 'quasar'
+import NIHSS from 'components/NIHSS'
 
 export default {
   name: 'LayoutDefault',
+  components: {
+    NIHSS
+  },
   data () {
     return {
       leftDrawerOpen: false
