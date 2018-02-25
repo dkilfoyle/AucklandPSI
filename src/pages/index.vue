@@ -95,21 +95,27 @@ export default {
       this.$store.dispatch('patientCriteria/resetPatientCriteria')
       this.$store.dispatch('scanCriteria/resetScanCriteria')
       this.$refs.stepper.reset()
-    }
-  },
-  updated () {
-    // ugly hack to convert all webfont material icons to image icons for intranet with webfont download disabled
-    if (this.$q.platform.is.name === 'ie') {
-      var miAll = document.querySelectorAll('.material-icons')
-      for (var i = 0; i < miAll.length; i++) {
-        var mi = miAll[i]
-        mi.classList.remove('material-icons')
-        mi.classList.add('png-icons')
-        var iconName = mi.innerHTML
-        mi.innerHTML = ''
-        mi.classList.add('png-' + iconName)
+    },
+    convertMaterialIconsToPng () {
+      // ugly hack to convert all webfont material icons to image icons for intranet with webfont download disabled
+      if (this.$q.platform.is.name === 'ie') {
+        var miAll = document.querySelectorAll('.material-icons')
+        for (var i = 0; i < miAll.length; i++) {
+          var mi = miAll[i]
+          mi.classList.remove('material-icons')
+          mi.classList.add('png-icons')
+          var iconName = mi.innerHTML
+          mi.innerHTML = ''
+          mi.classList.add('png-' + iconName)
+        }
       }
     }
+  },
+  mounted () {
+    this.convertMaterialIconsToPng()
+  },
+  updated () {
+    this.convertMaterialIconsToPng()
   }
 }
 </script>
