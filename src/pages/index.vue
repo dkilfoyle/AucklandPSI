@@ -6,7 +6,7 @@
             q-card-main.q-body-2
               p A screening tool to identify acute stroke patients suitable for urgent transfer to Auckland Hospital for Percutaneous Stroke Intervention (PSI) a.k.a. Clot Retrieval.
               p Answer the questions below. Rare cases may depart from these standard criteria - discuss with your local neurologist or stroke physician.
-              .row.items-center
+              .row.items-center.gutter-md
                 .col-sm
                   q-field(label="Hospital")
                     q-select(v-model="dhbHospital", :options="dhbHospitalOptions")
@@ -96,6 +96,20 @@ export default {
       this.$store.dispatch('scanCriteria/resetScanCriteria')
       this.$refs.stepper.reset()
     }
+  },
+  updated () {
+    // ugly hack to convert all webfont material icons to image icons for intranet with webfont download disabled
+    if (this.$q.platform.is.name === 'ie') {
+      var miAll = document.querySelectorAll('.material-icons')
+      for (var i = 0; i < miAll.length; i++) {
+        var mi = miAll[i]
+        mi.classList.remove('material-icons')
+        mi.classList.add('png-icons')
+        var iconName = mi.innerHTML
+        mi.innerHTML = ''
+        mi.classList.add('png-' + iconName)
+      }
+    }
   }
 }
 </script>
@@ -110,4 +124,41 @@ export default {
 .failing {
   background-color: $amber-2
 }
+
+.png-icons {
+    display: inline-block;
+    overflow: hidden;
+    color: transparent;
+    font-family: sans-serif;
+    width: 24px;
+    height: 24px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+icons = chevron_right,
+ chevron_left,
+ scanner,
+ access_time,
+ flight,
+ build,
+ cached,
+ person,
+ arrow_drop_down,
+ check_box_outline_blank,
+ check_box,
+ radio_button_unchecked,
+ radio_button_checked,
+ check,
+ pass,
+ cancel,
+ brain,
+ menu,
+ warning,
+ warningw
+
+for iconname in icons
+  .png-{iconname}
+    background-image: url('~assets/' + iconname + '.png')
+
 </style>
