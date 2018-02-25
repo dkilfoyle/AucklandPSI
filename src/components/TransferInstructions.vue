@@ -81,6 +81,12 @@ export default {
     elapsedTime: (value) => {
       this.elapsedTime(value)
     }
+  },
+  mounted () {
+    var self = this
+    this.$nextTick(function () {
+      self.$root.$emit('convertIcons')
+    })
   }
 }
 </script>

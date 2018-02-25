@@ -97,6 +97,12 @@ export default {
       get () { return this.$store.state.patientCriteria.localisation },
       set (value) { this.$store.commit('patientCriteria/setLocalisation', value) }
     }
+  },
+  mounted () {
+    var self = this
+    this.$nextTick(function () {
+      self.$root.$emit('convertIcons')
+    })
   }
 }
 </script>

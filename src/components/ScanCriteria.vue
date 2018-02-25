@@ -128,6 +128,12 @@ export default {
       get () { return this.$store.state.scanCriteria.ctpperfusion },
       set (value) { this.$store.commit('scanCriteria/setCtpperfusion', value) }
     }
+  },
+  mounted () {
+    var self = this
+    this.$nextTick(function () {
+      self.$root.$emit('convertIcons')
+    })
   }
 }
 </script>

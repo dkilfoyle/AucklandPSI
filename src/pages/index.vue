@@ -112,10 +112,10 @@ export default {
     }
   },
   mounted () {
-    this.convertMaterialIconsToPng()
-  },
-  updated () {
-    this.convertMaterialIconsToPng()
+    this.$root.$on('convertIcons', this.convertMaterialIconsToPng)
+    this.$nextTick(function () {
+      this.convertMaterialIconsToPng()
+    })
   }
 }
 </script>

@@ -67,6 +67,12 @@ export default {
       get () { return this.$store.state.onsetCriteria.onsetTime },
       set (value) { this.$store.commit('onsetCriteria/setOnsetTime', value) }
     }
+  },
+  mounted () {
+    var self = this
+    this.$nextTick(function () {
+      self.$root.$emit('convertIcons')
+    })
   }
 }
 </script>
